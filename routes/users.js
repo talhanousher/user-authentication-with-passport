@@ -1,8 +1,9 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 const userHandler = require('../handlers/users');
 
-/* GET users listing. */
 router.route('/register')
-  .post(userHandler.registerUser);
+  .post(userHandler.register);
+router.route('/login')
+  .post(userHandler.login)
 module.exports = router;
