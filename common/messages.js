@@ -11,7 +11,9 @@ module.exports = {
         MISSING_KEY: `Missing Service Key in Headers`,
         INVALID_KEY: `Service Key is not valid`,
         KEY_JWT_ERR: `Can not use SERVICE KEY and USER TOKEN at the same time`,
-        ERROR_API_VERSION: `Api version not matched`
+        ERROR_API_VERSION: `Api version not matched`,
+        NOT_AUTHENTICATED: `You are not authenticated`,
+        NO_TOKEN: `No token provided`
     },
     user: {
         NO_USER: `No User`

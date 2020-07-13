@@ -4,6 +4,7 @@ const messages = require('../common/messages');
 const auth = require('../common/auth');
 
 const passport = require('passport');
+const { token } = require('morgan');
 
 exports.register = (req, res, next) => {
   User.register(new User({
@@ -13,9 +14,17 @@ exports.register = (req, res, next) => {
     if (err) {
       return next(err);
     }
-    return res.json({
-      user
-    })
+    auth.getLoginData(user)
+      .then(data => {
+        return res.json({
+          success: 'success',
+          data
+        })
+      })
+      .catch(err => {
+        console.log('Helllo')
+        return next({ message: messages.server.DB_ERROR, data: err })
+      });
   });
 };
 exports.login = (req, res, next) => {
