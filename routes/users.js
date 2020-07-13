@@ -7,7 +7,7 @@ const verify = require('../common/verify');
 router.route('/register')
   .post(userHandler.register);
 router.route('/login')
-  .post(userHandler.login)
+  .post(userHandler.login);
 router.route('/verify')
-  .get(verify.user)
+  .get(verify.user);
 module.exports = router;

@@ -1,24 +1,23 @@
 require('dotenv').config();
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+let express = require('express');
+let path = require('path');
+let cookieParser = require('cookie-parser');
+let logger = require('morgan');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const {serializeError, deserializeError} = require('serialize-error');
+const { serializeError } = require('serialize-error');
 
 const User = require('./models/User');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+let indexRouter = require('./routes/index');
+let usersRouter = require('./routes/users');
 
 const database = require('./common/database');
 const messages = require('./common/messages');
 const codes = require('./common/codes');
 
-var app = express();
-database.connect()
+let app = express();
+database.connect();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -41,9 +40,8 @@ app.use(passport.initialize());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   // next(createError(404));
   next({
     status: 404,
@@ -54,6 +52,7 @@ app.use(function(req, res, next) {
 
 if (app.get(`env`) === `development`) {
   app.use(function (err, req, res, next) {// eslint-disable-line no-unused-vars
+    // eslint-disable-next-line no-console
     console.log(`##API--ERR`);
     // log(err);
     res.status(err.status || codes.SERVER_ERROR);
@@ -66,7 +65,7 @@ if (app.get(`env`) === `development`) {
 }
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

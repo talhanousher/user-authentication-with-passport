@@ -8,12 +8,12 @@ exports.getToken = function (user, expiresIn) {
     expiresIn: expiresIn || 3600
   });
 };
-
 exports.user = function (req, res, next) {
   const token = req.headers[`x-access-token`];
   if (token) {
     jwt.verify(token, process.env.secretKey, async function (err, decoded) {
-      console.log(err)
+      // eslint-disable-next-line no-console
+      console.log(err);
       if (err) {
         return next(serverMessages.server.NOT_AUTHENTICATED);
       } else {
